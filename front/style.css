@@ -1,0 +1,35 @@
+
+
+input {
+    color: transparent;
+    width:100%;
+    padding-left:5px;
+    border-radius: 5px;
+    margin: 30px 0 !important;
+    outline: none;
+}
+
+button{
+    
+    padding:10px;
+    background-color: white;
+    border-radius: 5px !important;
+}
+
+.wrapper{
+    height: 100vh;
+}
+
+.form{
+    background-color: yellow;
+    width:100%;
+    height:200px;
+    padding:0 20px;
+   
+}
+
+@media (max-width: 768px) {
+    .form {
+        background-color: green;
+    }
+  }
