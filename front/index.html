@@ -12,13 +12,14 @@
 
 <body onload="init()">
     <div class="wrapper container d-flex justify-content-center align-items-center flex-column">
-        <div class="form d-flex justify-content-center align-items-center flex-column">
+        <form class="form d-flex justify-content-center align-items-center flex-column">
             <h1>Text</h1>
-            <input onkeyup="onInputType(event)" type="text" id="input">
-            <button onclick=onSubmit()>Submit</button>
-        </div>
+            <input onkeyup="onInputType(event)" id="input">
+            <button onclick=onSubmit(event)>Submit</button>
+            <input type="hidden" id="hiddenInput">
+        </form>
         <p id="text"></p>
-        <p id="submitetText"></p>
+        <p id="textAfterSubmit"></p>
     </div>
     <script src="script.js"></script>
 </body>

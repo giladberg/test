@@ -1,23 +1,36 @@
 
 function init() {
-    setParamToInput()
+    setParamsToInput()
 }
 
-function setParamToInput(){
-    const url = new URL(window.location.href);
-    const param = url.searchParams.get("param");
-    document.getElementById('input').value =param;
+function setParamsToInput(){
+    const params=getUrlVars() 
+    const hiddenInput = document.getElementById("hiddenInput");
+    hiddenInput.value=params.join(' ')
 }
 
-function onInputType(event){
-   const input= document.getElementById("input");
-   const intextput= document.getElementById("text");
-   input.style.color = "black";
-    intextput.innerHTML=event.target.value;
+function onInputType(event) {
+    const textInput = document.getElementById("text");
+    textInput.innerHTML = event.target.value;
 }
 
-function onSubmit(){
-    const input= document.getElementById("input");
-    const submitetText= document.getElementById("submitetText");
-    submitetText.innerHTML=input.value
+function onSubmit(event) {
+    event.preventDefault()
+    const input = document.getElementById("input");
+    const hiddenInput=document.getElementById("hiddenInput")
+    const textAfterSubmit = document.getElementById("textAfterSubmit");
+    textAfterSubmit.innerHTML = input.value+' '+ hiddenInput.value
+    input.value=''
+}
+
+function getUrlVars() {
+    const params = {};
+    const paramsToReturn = []
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        params[key] = value;
+    });
+    for (let param in params) {
+        paramsToReturn.push(params[param]+'')
+    }
+    return paramsToReturn;
 }
