@@ -5,8 +5,17 @@ function init() {
 
 function setParamsToInput(){
     const params=getUrlVars() 
-    const hiddenInput = document.getElementById("hiddenInput");
-    hiddenInput.value=params.join(' ')
+    renderParamsAsHiddenInput(params)
+}
+function renderParamsAsHiddenInput(params){
+    const elHiddenInputs = document.querySelector('.hiddenInputs')
+    const strInputs=[]
+    for (let param in params) {
+        const input=`<input type="hidden" class="hiddenInput" value="${param}:${params[param]}"/>`
+        strInputs.push(input)
+    }
+    elHiddenInputs.innerHTML = strInputs.join('');
+
 }
 
 function onInputType(event) {
@@ -17,20 +26,17 @@ function onInputType(event) {
 function onSubmit(event) {
     event.preventDefault()
     const input = document.getElementById("input");
-    const hiddenInput=document.getElementById("hiddenInput")
     const textAfterSubmit = document.getElementById("textAfterSubmit");
-    textAfterSubmit.innerHTML = input.value+' '+ hiddenInput.value
+    const hiddenInputs = document.querySelectorAll(".hiddenInput");
+    hiddenInputs.forEach(hiddenInput=> textAfterSubmit.innerHTML +=hiddenInput.value+' ')
+    textAfterSubmit.innerHTML += input.value
     input.value=''
 }
 
 function getUrlVars() {
     const params = {};
-    const paramsToReturn = []
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
         params[key] = value;
     });
-    for (let param in params) {
-        paramsToReturn.push(params[param]+'')
-    }
-    return paramsToReturn;
+    return params;
 }
